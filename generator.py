@@ -223,7 +223,7 @@ def write_to_file(machine_info, port_details):
                 opened_file.write("- [ ] dig\n")
                 opened_file.write("- [ ] zone transfer\n")
 
-            if service['service'] == "FTP" or service['service'] == "SMB/Samba":
+            if service['service'] == "FTP(S)" or service['service'] == "SMB/Samba":
                 opened_file.write("- [ ] file upload\n")
 
             if service['service'] == "RPC":
