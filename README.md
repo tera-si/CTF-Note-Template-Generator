@@ -2,6 +2,8 @@
 
 A Python3.6+ script that generate a note template in markdown for use during CTF and OSCP.
 
+If you are interested in how I use this note template, you can [check out my repo of the manual template](https://github.com/tera-si/CTF-note-template)
+
 # Latest Version
 
 - Fixed an issue where some of the checkboxes won't appear for FTP(S) service
