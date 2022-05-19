@@ -216,7 +216,7 @@ def write_to_file(machine_info, port_details):
             if service['service'] == "SMB/Samba":
                 opened_file.write("- [ ] enum4linux\n")
 
-            if service['service'] == "SSH" or service['service'] == "RDP" or service['service'] == "FTP" or service['service'] == "SMB/Samba" or service['service'] == "VNC" or service['service'] == "WinRM":
+            if service['service'] == "SSH" or service['service'] == "RDP" or service['service'] == "FTP(S)" or service['service'] == "SMB/Samba" or service['service'] == "VNC" or service['service'] == "WinRM":
                 opened_file.writelines(login_checklist)
 
             if service['service'] == "DNS":
