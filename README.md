@@ -166,6 +166,7 @@ Linux
 - [ ] default credentials
 - [ ] reused credentials
 - [ ] authentication bypass
+- [ ] file upload
 
 ## 1337 UDP Something not on the list v1
 
