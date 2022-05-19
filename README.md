@@ -2,12 +2,16 @@
 
 A Python3.6+ script that generate a note template in markdown for use during CTF and OSCP.
 
+# Latest Version
+
+- Fixed an issue where some of the checkboxes won't appear for FTP(S) service
+
 # Usage
 
 ```
 $ python3 generator.py
 ##################################################
-# CTF Note Template Generator v1.0               #
+# CTF Note Template Generator v1.0.1             #
 # By terasi                                      #
 # https://github.com/tera-si                     #
 ##################################################
@@ -155,6 +159,11 @@ Linux
 - [ ] hacktricks
 - [ ] google
 - [ ] nmap scripts
+- [ ] anonymous login
+- [ ] weak credentials
+- [ ] default credentials
+- [ ] reused credentials
+- [ ] authentication bypass
 
 ## 1337 UDP Something not on the list v1
 
