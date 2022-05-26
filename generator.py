@@ -228,9 +228,18 @@ def write_to_file(machine_info, port_details):
 
             if service['service'] == "RPC":
                 opened_file.write("- [ ] rpcdump.py\n")
+                opened_file.write("- [ ] rpcinfo\n")
 
             if service['service'] == "HTTP(S)":
                 opened_file.writelines(web_checklist)
+               
+            if service['service'] == "SNMP":
+                opened_file.write("- [ ] snmpwalk\n")
+                opened_file.write("- [ ] onesixtyone\n")
+                
+            if service['service'] == "NFS":
+                opened_file.write("- [ ] showmount\n")
+                opened_file.write("- [ ] mount\n")
 
             opened_file.write("\n")
 
