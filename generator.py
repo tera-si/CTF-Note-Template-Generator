@@ -34,7 +34,7 @@ common_services = [
 
 def print_banner():
     separator = "#" * 50
-    banner_text = "# CTF Note Template Generator v1.0.1" + " " * 13 + "#\n"
+    banner_text = "# CTF Note Template Generator v1.0.2" + " " * 13 + "#\n"
     banner_text += "# By terasi" + " " * 38 + "#\n"
     banner_text += "# https://github.com/tera-si" + " " * 21 + "#"
 
@@ -222,6 +222,7 @@ def write_to_file(machine_info, port_details):
             if service['service'] == "DNS":
                 opened_file.write("- [ ] dig\n")
                 opened_file.write("- [ ] zone transfer\n")
+                opened_file.write("- [ ] dnsrecon\n")
 
             if service['service'] == "FTP(S)" or service['service'] == "SMB/Samba":
                 opened_file.write("- [ ] file upload\n")
