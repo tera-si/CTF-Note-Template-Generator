@@ -14,7 +14,7 @@ If you are interested in how I use this note template, you can [check out my rep
 ```
 $ python3 generator.py
 ##################################################
-# CTF Note Template Generator v1.0.1             #
+# CTF Note Template Generator v1.0.2             #
 # By terasi                                      #
 # https://github.com/tera-si                     #
 ##################################################
