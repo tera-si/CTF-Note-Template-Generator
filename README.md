@@ -7,7 +7,7 @@ If you are interested in how I use this note template, you can [check out my rep
 # Latest Version
 
 - Fixed an issue where some of the checkboxes won't appear for FTP(S) service
-- New checkboxes for DNS, RPC, SNMP, and NFS introduced
+- New checkboxes for DNS, HTTP(S), RPC, SNMP, and NFS introduced
 
 # Usage
 
@@ -230,3 +230,7 @@ FLAG{hash}
 Feel free to fork it!
 
 Issue reports and suggestions welcome!
+
+# TODO
+
+- [ ] Automatically parse XML output from NMAP
