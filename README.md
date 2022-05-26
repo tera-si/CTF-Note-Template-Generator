@@ -7,6 +7,7 @@ If you are interested in how I use this note template, you can [check out my rep
 # Latest Version
 
 - Fixed an issue where some of the checkboxes won't appear for FTP(S) service
+- New checkboxes for DNS, RPC, SNMP, and NFS introduced
 
 # Usage
 
