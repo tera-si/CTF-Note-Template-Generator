@@ -163,6 +163,7 @@ def write_to_file(machine_info, port_details):
     ]
 
     web_checklist = [
+        "- [ ] whatweb\n",
         "- [ ] robots.txt\n",
         "- [ ] sitemap.xml\n",
         "- [ ] nikto\n",
