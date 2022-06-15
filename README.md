@@ -2,6 +2,10 @@
 
 A Python3.6+ script that generate a note template and basic checklists in markdown for use during CTF and OSCP. Can parse Nmap XML outputs automatically.
 
+Feel free to fork it!
+
+Issue reports and suggestions welcome!
+
 If you are interested in how I use this note template, you can [check out my repo of the manual template](https://github.com/tera-si/CTF-note-template)
 
 # Latest Version
@@ -376,10 +380,6 @@ FLAG{hash}
 - [Mitigation/Protection guide](https://example.com)
 - [Link to tool/payload/wordlist/exploit](https://example.com)
 ```
-
-Feel free to fork it!
-
-Issue reports and suggestions welcome!
 
 # TODO
 
