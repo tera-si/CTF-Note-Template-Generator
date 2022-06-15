@@ -341,7 +341,7 @@ def write_to_file(machine_info, port_details):
                 opened_file.write("- [ ] ldapdomaindump\n")
                 opened_file.write("- [ ] ldapsearch\n")
 
-            if service['service'] == "KERBEROS":
+            if service['service'] == "KERBEROS" or service['service'] == "Kerberos":
                 opened_file.writelines(kerberos_checklist)
 
             opened_file.write("\n")
