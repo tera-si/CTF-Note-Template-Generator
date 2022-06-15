@@ -37,7 +37,9 @@ options:
 
 ## Auto Mode: Parsing Nmap XML outputs
 
-You can supply your nmap scans XML outputs to the script, it will then automatically parse and generate a markdown note plus checklists. At the moment it expects at most one TCP scan and one UDP scan output.
+You can supply your nmap scans XML outputs to the script, it will then automatically parse and generate a markdown note plus checklists. You would still need to manually enter the CTF platform and machine name, however.
+
+At the moment it expects at most one TCP scan and one UDP scan output.
 
 So you can supply:
 
