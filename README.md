@@ -1,6 +1,6 @@
 # CTF-Note-Template-Generator
 
-A Python3.6+ script that generate a note template and basic checklists in markdown for use during CTF and OSCP.
+A Python3.6+ script that generate a note template and basic checklists in markdown for use during CTF and OSCP. Can parse Nmap XML outputs automatically.
 
 If you are interested in how I use this note template, you can [check out my repo of the manual template](https://github.com/tera-si/CTF-note-template)
 
@@ -71,6 +71,8 @@ Happy hacking!
 If no Nmap scans were supplied, it defaults to manual mode in which you can enter the scan results manually.
 
 ```
+$ python3 generator.py
+
 ##################################################
 # CTF Note Template Generator v1.1.0             #
 # By terasi                                      #
@@ -151,7 +153,7 @@ If no Nmap scans were supplied, it defaults to manual mode in which you can ente
 [?] Detected product and version: Kerberos
 ==================================================
 [i] Getting details of 3rd service
-[?] Port number: 80
+[?] Port number: 389
 [?] Port type: 
 	1: TCP
 	2: UDP
@@ -277,7 +279,7 @@ Windows 10
 - [ ] zerologon (CVE-2020-1472)
 - [ ] authentication sniffing/poisoning (NOT allowed in OSCP)
 
-## 80 TCP LDAP(S) AD LDAP
+## 389 TCP LDAP(S) AD LDAP
 
 - [ ] searchsploit
 - [ ] hacktricks
