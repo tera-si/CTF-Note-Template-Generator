@@ -1,10 +1,18 @@
 # CTF-Note-Template-Generator
 
-A Python3.6+ script that generate a note template in markdown for use during CTF and OSCP.
+A Python3.6+ script that generate a note template and basic checklists in markdown for use during CTF and OSCP.
 
 If you are interested in how I use this note template, you can [check out my repo of the manual template](https://github.com/tera-si/CTF-note-template)
 
 # Latest Version
+
+## 1.1.0
+
+- Allows parsing of nmap XML output
+- Adds more checklists (e.g. kerberos, privesc)
+- Adds a post-exploitation part in the notes section
+
+## 1.0.2
 
 - Fixed an issue where some of the checkboxes won't appear for FTP(S) service
 - New checkboxes for DNS, HTTP(S), RPC, SNMP, and NFS introduced
@@ -12,54 +20,72 @@ If you are interested in how I use this note template, you can [check out my rep
 # Usage
 
 ```
-$ python3 generator.py
+$ python3 generator.py -h
+usage: generator.py [-h] [tcp_xml] [udp_xml]
+
+Generate a markdown note and checklists for use during CTF and OSCP. Can parse nmap XML outputs
+automatically, limited to one TCP and one UDP scan. If no nmap outputs were supplied, will
+default to manual data input.
+
+positional arguments:
+  tcp_xml     nmap TCP scan XML output, optional
+  udp_xml     nmap UDP scan XML output, optional
+
+options:
+  -h, --help  show this help message and exit
+```
+
+## Auto Mode: Parsing Nmap XML outputs
+
+You can supply your nmap scans XML outputs to the script, it will then automatically parse and generate a markdown note plus checklists. At the moment it expects at most one TCP scan and one UDP scan output.
+
+So you can supply:
+
+- one TCP scan
+- one UDP scan
+- one TCP scan + one UDP scan
+
+It requires that both scans be of the same machine. If differing IPs were parsed from each file, the script will abort.
+
+At the moment it also requires both scans be of the same OS (if OS detection were enabled during the any of the nmap scans). If differing OSs were parsed from each file, the script will abort. (But I might remove this check since OS detection are just gusses anyway, so it is not unsurprising if both scans returned different OS. But then I will need a way to reconcile the conflict.)
+
+```
+$ python3 generator.py tcp-scan.xml udp-scan.xml
+
 ##################################################
-# CTF Note Template Generator v1.0.2             #
+# CTF Note Template Generator v1.1.0             #
 # By terasi                                      #
 # https://github.com/tera-si                     #
 ##################################################
 
-[?] Platform: HackTheBox
+[i] nmap output(s) provided, starting automatic mode...
+[?] Platform: Demo Test
+[?] Machine Name: localhost
+[i] Creating note template...
+[i] Note template successfully created
+Happy hacking!
+```
+
+## Manual Mode
+
+If no Nmap scans were supplied, it defaults to manual mode in which you can enter the scan results manually.
+
+```
+##################################################
+# CTF Note Template Generator v1.1.0             #
+# By terasi                                      #
+# https://github.com/tera-si                     #
+##################################################
+
+[i] No nmap output provided, starting manual entry mode...
+[?] Platform: Demo Test
 [?] Machine Name: localhost
 [?] Machine IP: 127.0.0.1
-[?] Detected OS:Linux
-[?] Number of open ports on the target: 3
+[?] Detected OS: Windows 10
+[?] Number of open ports on the target: 4
 ==================================================
 [i] Getting details of 1st service
-[?] Port number: 21
-[?] Port type: 
-	1: TCP
-	2: UDP
-[?] Please enter the corresponding number: 1
-[?] Detected service: 
-	1: FTP(S)
-	2: SSH
-	3: SMTP(S)
-	4: DNS
-	5: HTTP(S)
-	6: Kerberos
-	7: POP(S)
-	8: RPC
-	9: NetBIOS
-	10: IMAP(S)
-	11: SNMP
-	12: LDAP(S)
-	13: SMB/Samba
-	14: SQL
-	15: NFS
-	16: Docker
-	17: RDP
-	18: VNC
-	19: Redis
-	20: WinRM
-	21: NoSQL
-	22: Unknown
-	23: Other
-[?] Please enter the corresponding number: 1
-[?] Detected product and version: vsFTPd 3.0.3
-==================================================
-[i] Getting details of 2nd service
-[?] Port number:1337
+[?] Port number: 53
 [?] Port type: 
 	1: TCP
 	2: UDP
@@ -88,16 +114,15 @@ $ python3 generator.py
 	21: NoSQL
 	22: Unknown
 	23: Other
-[?] Please enter the corresponding number: 23
-[?] Please enter the detected service: Something not on the list
-[?] Detected product and version: v1  
+[?] Please enter the corresponding number: 4
+[?] Detected product and version: AD DNS
 ==================================================
-[i] Getting details of 3rd service
-[?] Port number: 8000
+[i] Getting details of 2nd service
+[?] Port number: 88
 [?] Port type: 
 	1: TCP
 	2: UDP
-[?] Please enter the corresponding number:1
+[?] Please enter the corresponding number: 1
 [?] Detected service: 
 	1: FTP(S)
 	2: SSH
@@ -122,13 +147,81 @@ $ python3 generator.py
 	21: NoSQL
 	22: Unknown
 	23: Other
-[?] Please enter the corresponding number: 5
-[?] Detected product and version: Python HTTP Server
+[?] Please enter the corresponding number: 6
+[?] Detected product and version: Kerberos
+==================================================
+[i] Getting details of 3rd service
+[?] Port number: 80
+[?] Port type: 
+	1: TCP
+	2: UDP
+[?] Please enter the corresponding number: 1
+[?] Detected service: 
+	1: FTP(S)
+	2: SSH
+	3: SMTP(S)
+	4: DNS
+	5: HTTP(S)
+	6: Kerberos
+	7: POP(S)
+	8: RPC
+	9: NetBIOS
+	10: IMAP(S)
+	11: SNMP
+	12: LDAP(S)
+	13: SMB/Samba
+	14: SQL
+	15: NFS
+	16: Docker
+	17: RDP
+	18: VNC
+	19: Redis
+	20: WinRM
+	21: NoSQL
+	22: Unknown
+	23: Other
+[?] Please enter the corresponding number: 12
+[?] Detected product and version: AD LDAP
+==================================================
+[i] Getting details of 4th service
+[?] Port number: 445
+[?] Port type: 
+	1: TCP
+	2: UDP
+[?] Please enter the corresponding number: 1
+[?] Detected service: 
+	1: FTP(S)
+	2: SSH
+	3: SMTP(S)
+	4: DNS
+	5: HTTP(S)
+	6: Kerberos
+	7: POP(S)
+	8: RPC
+	9: NetBIOS
+	10: IMAP(S)
+	11: SNMP
+	12: LDAP(S)
+	13: SMB/Samba
+	14: SQL
+	15: NFS
+	16: Docker
+	17: RDP
+	18: VNC
+	19: Redis
+	20: WinRM
+	21: NoSQL
+	22: Unknown
+	23: Other
+[?] Please enter the corresponding number: 13
+[?] Detected product and version: SMB
 ==================================================
 [i] Creating note template...
 [i] Note template successfully created
-Happy hacking!
+Happy hacking
 ```
+
+## Created Note
 
 The created note would look like this:
 
@@ -144,7 +237,7 @@ The created note would look like this:
 
 # Info
 
-- HackTheBox
+- Demo Test
 - localhost
 - 127.0.0.1
 
@@ -154,38 +247,91 @@ The created note would look like this:
 
 ## OS Detection
 
-Linux
+Windows 10
 
-## 21 TCP FTP(S) vsFTPd 3.0.3
+## 53 UDP DNS AD DNS
 
 - [ ] searchsploit
 - [ ] hacktricks
 - [ ] google
 - [ ] nmap scripts
+- [ ] dig
+- [ ] zone transfer
+- [ ] dnsrecon
+- [ ] dnsenum
+
+## 88 TCP Kerberos Kerberos
+
+- [ ] searchsploit
+- [ ] hacktricks
+- [ ] google
+- [ ] nmap scripts
+- [ ] WADComs
+- [ ] kerbrute
+- [ ] ASREPRoast
+- [ ] Kerberoast
+- [ ] password spraying
+- [ ] pass the hash
+- [ ] pass the ticket
+- [ ] forging AD certificate
+- [ ] zerologon (CVE-2020-1472)
+- [ ] authentication sniffing/poisoning (NOT allowed in OSCP)
+
+## 80 TCP LDAP(S) AD LDAP
+
+- [ ] searchsploit
+- [ ] hacktricks
+- [ ] google
+- [ ] nmap scripts
+- [ ] ldapdomaindump
+- [ ] ldapsearch
+
+## 445 TCP SMB/Samba SMB
+
+- [ ] searchsploit
+- [ ] hacktricks
+- [ ] google
+- [ ] nmap scripts
+- [ ] enum4linux
 - [ ] anonymous login
+- [ ] empty password
 - [ ] weak credentials
 - [ ] default credentials
 - [ ] reused credentials
 - [ ] authentication bypass
 - [ ] file upload
 
-## 1337 UDP Something not on the list v1
+## Privilege Escalation (Windows)
 
-- [ ] searchsploit
 - [ ] hacktricks
-- [ ] google
-- [ ] nmap scripts
-
-## 8000 TCP HTTP(S) Python HTTP Server
-
 - [ ] searchsploit
-- [ ] hacktricks
 - [ ] google
-- [ ] nmap scripts
-- [ ] robots.txt
-- [ ] sitemap.xml
-- [ ] nikto
-- [ ] gobuster
+- [ ] kernel/system util exploit
+- [ ] stored SSH keys
+- [ ] stored passwords
+- [ ] autorun/startup
+- [ ] scheduled tasks
+- [ ] AlwaysInstalledElevated
+- [ ] SeImpersonatePrivilege
+- [ ] writable service registry keys
+- [ ] writable service binary
+- [ ] writable service configuration
+- [ ] unquoted service path
+- [ ] unattend.xml
+- [ ] history/log files
+- [ ] installed softwares
+- [ ] alternate interfaces
+- [ ] local services
+
+## Post-Exploitation
+
+- [ ] establish persistence
+- [ ] hash dumping
+- [ ] sensitive files/data
+- [ ] ticket harvesting
+- [ ] bloodhound (Windows)
+- [ ] hosts, arp, routes
+- [ ] pivoting
 
 ---
 
@@ -233,4 +379,5 @@ Issue reports and suggestions welcome!
 
 # TODO
 
-- [ ] Automatically parse XML output from NMAP
+- [x] Automatically parse XML output from NMAP
+- [ ] "Smarter" OS detection
