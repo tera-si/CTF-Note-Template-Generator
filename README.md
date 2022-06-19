@@ -58,7 +58,7 @@ At the moment it also requires both scans be of the same OS (if OS detection wer
 $ python3 generator.py tcp-scan.xml udp-scan.xml
 
 ##################################################
-# CTF Note Template Generator v1.1.0             #
+# CTF Note Template Generator v1.1.1             #
 # By terasi                                      #
 # https://github.com/tera-si                     #
 ##################################################
@@ -79,7 +79,7 @@ If no Nmap scans were supplied, it defaults to manual mode in which you can ente
 $ python3 generator.py
 
 ##################################################
-# CTF Note Template Generator v1.1.0             #
+# CTF Note Template Generator v1.1.1             #
 # By terasi                                      #
 # https://github.com/tera-si                     #
 ##################################################
