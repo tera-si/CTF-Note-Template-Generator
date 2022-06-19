@@ -10,16 +10,15 @@ If you are interested in how I use this note template, you can [check out my rep
 
 # Latest Version
 
+## 1.1.1
+
+- Adds "/etc/sudoers permissions" to Linux privilege escalation checklist
+
 ## 1.1.0
 
 - Allows parsing of nmap XML output
 - Adds more checklists (e.g. kerberos, privesc)
 - Adds a post-exploitation part in the notes section
-
-## 1.0.2
-
-- Fixed an issue where some of the checkboxes won't appear for FTP(S) service
-- New checkboxes for DNS, HTTP(S), RPC, SNMP, and NFS introduced
 
 # Usage
 
