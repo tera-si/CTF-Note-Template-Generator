@@ -36,7 +36,7 @@ common_services = [
 
 def print_banner():
     separator = "#" * 50
-    banner_text = "# CTF Note Template Generator v1.1.0" + " " * 13 + "#\n"
+    banner_text = "# CTF Note Template Generator v1.1.1" + " " * 13 + "#\n"
     banner_text += "# By terasi" + " " * 38 + "#\n"
     banner_text += "# https://github.com/tera-si" + " " * 21 + "#"
 
