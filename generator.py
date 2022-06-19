@@ -200,6 +200,7 @@ def write_to_file(machine_info, port_details):
         "- [ ] stored passwords\n",
         "- [ ] /etc/passwd permissions\n",
         "- [ ] /etc/shadow permissions\n",
+        "- [ ] /etc/sudoers permissions\n",
         "- [ ] sudo -l\n",
         "- [ ] system timer/cronjobs\n",
         "- [ ] /etc/crontab permissions\n",
