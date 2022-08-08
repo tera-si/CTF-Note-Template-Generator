@@ -218,6 +218,10 @@ def write_to_file(machine_info, port_details):
         "- [ ] installed softwares\n",
         "- [ ] alternate interfaces\n",
         "- [ ] local services\n",
+        "- [ ] unusual files/directories in root\n",
+        "- [ ] unusual files/directories in user's home\n",
+        "- [ ] unusual files/directories in programs/libraries path\n",
+        "- [ ] unusual mounted file systems\n",
     ]
 
     windows_privesc = [
@@ -244,6 +248,10 @@ def write_to_file(machine_info, port_details):
         "- [ ] DLL injection\n",
         "- [ ] alternate interfaces\n",
         "- [ ] local services\n",
+        "- [ ] unusual files/directories in root\n",
+        "- [ ] unusual files/directories in user's home\n",
+        "- [ ] unusual files/directories in programs/libraries path\n",
+        "- [ ] unusual mounted file systems\n",
     ]
 
     generic_privesc = [
@@ -260,6 +268,10 @@ def write_to_file(machine_info, port_details):
         "- [ ] installed softwares\n",
         "- [ ] alternate interfaces\n",
         "- [ ] local services\n",
+        "- [ ] unusual files/directories in root\n",
+        "- [ ] unusual files/directories in user's home\n",
+        "- [ ] unusual files/directories in programs/libraries path\n",
+        "- [ ] unusual mounted file systems\n",
     ]
 
     post_exploit_checklist = [
