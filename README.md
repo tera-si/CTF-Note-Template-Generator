@@ -10,6 +10,11 @@ If you are interested in how I use this note template, you can [check out my rep
 
 # Latest Version
 
+## 1.1.2
+
+- Fixed an issue where "unknown" services may crash the script during XML parsing
+- More checkboxes!
+
 ## 1.1.1
 
 - Adds "/etc/sudoers permissions" to Linux privilege escalation checklist
@@ -58,7 +63,7 @@ At the moment it also requires both scans be of the same OS (if OS detection wer
 $ python3 generator.py tcp-scan.xml udp-scan.xml
 
 ##################################################
-# CTF Note Template Generator v1.1.1             #
+# CTF Note Template Generator v1.1.2             #
 # By terasi                                      #
 # https://github.com/tera-si                     #
 ##################################################
@@ -79,7 +84,7 @@ If no Nmap scans were supplied, it defaults to manual mode in which you can ente
 $ python3 generator.py
 
 ##################################################
-# CTF Note Template Generator v1.1.1             #
+# CTF Note Template Generator v1.1.2             #
 # By terasi                                      #
 # https://github.com/tera-si                     #
 ##################################################
