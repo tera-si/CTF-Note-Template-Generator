@@ -36,7 +36,7 @@ common_services = [
 
 def print_banner():
     separator = "#" * 50
-    banner_text = "# CTF Note Template Generator v1.1.1" + " " * 13 + "#\n"
+    banner_text = "# CTF Note Template Generator v1.1.2" + " " * 13 + "#\n"
     banner_text += "# By terasi" + " " * 38 + "#\n"
     banner_text += "# https://github.com/tera-si" + " " * 21 + "#"
 
@@ -156,6 +156,7 @@ def write_to_file(machine_info, port_details):
     basic_checklist = [
         "- [ ] searchsploit\n",
         "- [ ] hacktricks\n",
+        "- [ ] PayloadsAllTheThings\n",
         "- [ ] google\n",
         "- [ ] nmap scripts\n"
     ]
@@ -180,12 +181,18 @@ def write_to_file(machine_info, port_details):
     kerberos_checklist = [
         "- [ ] WADComs\n",
         "- [ ] kerbrute\n",
+        "- [ ] secretdump\n",
         "- [ ] ASREPRoast\n",
         "- [ ] Kerberoast\n",
         "- [ ] password spraying\n",
         "- [ ] pass the hash\n",
         "- [ ] pass the ticket\n",
+        "- [ ] silver ticket\n",
+        "- [ ] golden ticket\n",
+        "- [ ] stored tickets\n",
+        "- [ ] skeleton key attacks\n",
         "- [ ] forging AD certificate\n"
+        "- [ ] DCSync\n",
         "- [ ] zerologon (CVE-2020-1472)\n",
         "- [ ] authentication sniffing/poisoning (NOT allowed in OSCP)\n",
     ]
@@ -206,6 +213,7 @@ def write_to_file(machine_info, port_details):
         "- [ ] /etc/crontab permissions\n",
         "- [ ] SUID/SGID\n",
         "- [ ] capabilities\n",
+        "- [ ] NFS no root squash (/etc/exports)\n",
         "- [ ] history/log files\n",
         "- [ ] installed softwares\n",
         "- [ ] alternate interfaces\n",
@@ -224,6 +232,8 @@ def write_to_file(machine_info, port_details):
         "- [ ] scheduled tasks\n",
         "- [ ] AlwaysInstalledElevated\n",
         "- [ ] SeImpersonatePrivilege\n",
+        "- [ ] SeManageVolumePrivilege\n",
+        "- [ ] Other special privileges (check github gtworek/Priv2Admin)\n",
         "- [ ] writable service registry keys\n",
         "- [ ] writable service binary\n",
         "- [ ] writable service configuration\n",
@@ -231,6 +241,7 @@ def write_to_file(machine_info, port_details):
         "- [ ] unattend.xml\n",
         "- [ ] history/log files\n",
         "- [ ] installed softwares\n",
+        "- [ ] DLL injection\n",
         "- [ ] alternate interfaces\n",
         "- [ ] local services\n",
     ]
@@ -323,6 +334,7 @@ def write_to_file(machine_info, port_details):
 
             if service['service'] == "RPC" or service['service'] == "MSRPC":
                 opened_file.write("- [ ] rpcdump.py\n")
+                opened_file.write("- [ ] rpcclient\n")
 
             if service['service'] == "RPC" or service['service'] == "RPCBIND":
                 opened_file.write("- [ ] rpcinfo\n")
@@ -334,7 +346,7 @@ def write_to_file(machine_info, port_details):
                 opened_file.write("- [ ] snmpwalk\n")
                 opened_file.write("- [ ] onesixtyone\n")
 
-            if service['service'] == "NFS":
+            if service['service'] == "NFS" or service['service'] == "NFS_ACL":
                 opened_file.write("- [ ] showmount\n")
                 opened_file.write("- [ ] mount\n")
 
@@ -342,7 +354,7 @@ def write_to_file(machine_info, port_details):
                 opened_file.write("- [ ] ldapdomaindump\n")
                 opened_file.write("- [ ] ldapsearch\n")
 
-            if service['service'] == "KERBEROS" or service['service'] == "Kerberos":
+            if service['service'] == "KERBEROS" or service['service'] == "Kerberos" or service['service'] == "KERBEROS-SEC" or service['service'] == "KERBEROS_SEC":
                 opened_file.writelines(kerberos_checklist)
 
             opened_file.write("\n")
@@ -429,27 +441,32 @@ def parse_xml(xml_file):
             if state.attrib["state"] == "open":
                 service_object = port.find("service")
 
-                port_details["service"] = service_object.attrib["name"].upper()
+                if service_object is not None:
+                    port_details["service"] = service_object.attrib["name"].upper()
 
-                parsed_product = None
-                parsed_version = None
-                product_detail = None
+                    parsed_product = None
+                    parsed_version = None
+                    product_detail = None
 
-                if "product" in service_object.attrib:
-                    parsed_product = service_object.attrib["product"]
+                    if "product" in service_object.attrib:
+                        parsed_product = service_object.attrib["product"]
 
-                if "version" in service_object.attrib:
-                    parsed_version = service_object.attrib["version"]
+                    if "version" in service_object.attrib:
+                        parsed_version = service_object.attrib["version"]
 
-                if parsed_product and parsed_version:
-                    product_detail = parsed_product.strip() + " " + parsed_version.strip()
+                    if parsed_product and parsed_version:
+                        product_detail = parsed_product.strip() + " " + parsed_version.strip()
 
-                if product_detail:
-                    port_details["version"] = product_detail
-                elif parsed_product:
-                    port_details["version"] = parsed_product.strip() + " unknown version"
+                    if product_detail:
+                        port_details["version"] = product_detail
+                    elif parsed_product:
+                        port_details["version"] = parsed_product.strip() + " unknown version"
+                    else:
+                        port_details["version"] = "unknown"
+
                 else:
-                    port_details["version"] = "unknown"
+                    port_details["service"] = "unknown service"
+                    port_details["version"] = ""
 
                 ports_data.append(port_details)
 
@@ -491,15 +508,10 @@ def auto_mode(tcp_file=None, udp_file=None):
             else:
                 machine_info["ip"] = parsed_udp["ip"]
 
-        # Should I keep this?
-        # Nmap OS detection are just guesses anyway, so it is possible to detect
-        # different OS from the same machine
         if "os" in parsed_udp:
             if "os" in machine_info:
                 if machine_info["os"] != parsed_udp["os"]:
-                    print("[!] Conflicting OSs detected in both nmap files\n[!] Aborting...")
-                    print("[!] Check if the files are scans of the same machine")
-                    exit()
+                    machine_info["os"] = f"{machine_info['os']} / {parsed_udp['os']}"
             else:
                 machine_info["os"] = parsed_udp["os"]
 
