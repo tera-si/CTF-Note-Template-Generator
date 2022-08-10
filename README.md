@@ -57,7 +57,6 @@ So you can supply:
 
 It requires that both scans be of the same machine. If differing IPs were parsed from each file, the script will abort.
 
-At the moment it also requires both scans be of the same OS (if OS detection were enabled during any of the nmap scans). If differing OSs were parsed from each file, the script will abort. (But I might remove this check since OS detection are just gusses anyway, so it is not unsurprising if both scans returned different OS. But then I will need a way to reconcile the conflict.)
 
 ```
 $ python3 generator.py tcp-scan.xml udp-scan.xml
